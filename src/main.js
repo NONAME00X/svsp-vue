@@ -8,8 +8,21 @@ import App from './App.vue'
 // 导入路由：进行页面跳转
 import router from './router'
 
+// 导入element-plus
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+
+
 // 创建项目对象
 const app = createApp(App)
+
+// 注册组件库
+for(const [key, component] of Object.entries(ElementPlusIconsVue)){
+  app.component(key, component)
+}
+// 使用
+app.use(ElementPlus)
 
 // 使用路由：让路由生效
 app.use(router)
