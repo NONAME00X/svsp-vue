@@ -12,6 +12,8 @@ import router from './router'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+// 导入axios
+import axios  from './request/http'
 
 
 // 创建项目对象
@@ -26,6 +28,9 @@ app.use(ElementPlus)
 
 // 使用路由：让路由生效
 app.use(router)
+
+// 配置为全局属性
+app.config.globalProperties.$axios = axios
 
 // 显示项目主页面
 app.mount('#app')

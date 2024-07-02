@@ -27,7 +27,7 @@
       <!-- 头像、个人、投稿 -->
       <el-col :span="8">
         <ul class="menu">
-          <li>
+          <li @click="dialogVisible = true">
             <el-avatar :size="40" src="https://cdjava96.oss-cn-chengdu.aliyuncs.com/avatar.png" />
           </li>
           <li style="margin-left: 10px;margin-right: 10px;">
@@ -82,10 +82,45 @@
              style="width: 100%; height: auto;">
       </el-col>
     </el-row>
+
+    <!-- 登录、注册对话框 -->
+    <el-dialog
+      v-model="dialogVisible"
+      title="登录/注册"
+      width="40%">
+      <div>
+        <el-row>
+          <el-col :span="20" :offset="2">
+            <el-input placeholder="账号" style="margin-bottom: 20px;" v-model="user.account"></el-input>
+            <el-input placeholder="密码" style="margin-bottom: 20px;" v-model="user.password" show-password></el-input>
+            <el-button type="success" style="width: 100px;" @click="login">登录</el-button>
+          </el-col>
+        </el-row>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data(){
+    return{
+      dialogVisible : false, // 默认情况下对话框隐藏
+      user:{
+        account: "",
+        password: ""
+      }
+    }
+  },
+  methods:{
+    login(){
+      console.log(this.user)
+      // 发请求进行登录  axios
+      this.$axios.post("user/login", this.user).then(res =>{
+        console.log(res)
+      })
+    }
+  }
+}
 </script>
 <style scoped>
 .menu {
