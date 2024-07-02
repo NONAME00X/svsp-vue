@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const http = axios.create({
-  baseURL: 'http://localhost:8080/', // 设置基础 URL  user/login
+  baseURL: '/api/', // 设置基础 URL  http://localhost:8080/api/user/login
   // 其他配置...
 });
 
