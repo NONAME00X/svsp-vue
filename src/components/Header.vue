@@ -117,6 +117,20 @@ export default {
       // 发请求进行登录  axios
       this.$axios.post("user/login", this.user).then(res =>{
         console.log(res)
+        if(res.data.code == 200){
+          this.$message.success("登录成功")
+          // 将用户信息、token信息保存到本地
+          let user = res.data.data
+          let token = res.headers.authorization
+
+          console.log(user)
+          console.log(token)
+
+          // localStorage:浏览器自带用来存储数据的
+          // JSON.stringify 将对象转换JSON格式字符串，因为localStorage只能存字符串
+          window.localStorage.setItem("user", JSON.stringify(user))
+          window.localStorage.setItem("token", token)
+        }
       })
     }
   }
