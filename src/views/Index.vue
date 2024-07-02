@@ -10,6 +10,7 @@
         <Menus></Menus>
 
         <!-- 3.轮播图、热门视频 -->
+        <Hot></Hot>
 
         <!-- 4.其它视频的列表 -->
       </el-col>
@@ -23,6 +24,7 @@ import { RouterLink} from 'vue-router'
 // 1.导入组件
 import Header from '../components/Header.vue'
 import Menus from '../components/Menus.vue'
+import Hot from '../components/Hot.vue'
 
 export default{
   // 写事件函数，例如点击、双击、change事件等等
@@ -32,7 +34,8 @@ export default{
   components:{
     // 2.注册组件
     Header,
-    Menus
+    Menus,
+    Hot
   }
 }
 </script>
