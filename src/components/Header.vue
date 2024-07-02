@@ -27,8 +27,8 @@
       <!-- 头像、个人、投稿 -->
       <el-col :span="8">
         <ul class="menu">
-          <li @click="dialogVisible = true">
-            <el-avatar :size="40" src="https://cdjava96.oss-cn-chengdu.aliyuncs.com/avatar.png" />
+          <li @click="checkState">
+            <el-avatar :size="40" :src="avatar" />
           </li>
           <li style="margin-left: 10px;margin-right: 10px;">
             <el-icon color="white">
@@ -101,6 +101,7 @@
   </div>
 </template>
 <script>
+
 export default {
   data(){
     return{
@@ -108,7 +109,16 @@ export default {
       user:{
         account: "",
         password: ""
-      }
+      },
+      avatar: "https://cdjava96.oss-cn-chengdu.aliyuncs.com/login.png"
+    }
+  },
+  mounted(){
+    // 判断本地是否有用户信息  得到的是字符串
+    let user = window.localStorage.getItem("user")
+    if(user){
+      // JSON.parse 将字符串转换成对象
+      this.avatar = JSON.parse(user).avatar
     }
   },
   methods:{
@@ -123,15 +133,31 @@ export default {
           let user = res.data.data
           let token = res.headers.authorization
 
-          console.log(user)
-          console.log(token)
+          // 设置用户头像
+          this.avatar = user.avatar
 
           // localStorage:浏览器自带用来存储数据的
           // JSON.stringify 将对象转换JSON格式字符串，因为localStorage只能存字符串
           window.localStorage.setItem("user", JSON.stringify(user))
           window.localStorage.setItem("token", token)
+
+          // 隐藏登录的对话框
+          this.dialogVisible = false
         }
       })
+    },
+    checkState(){
+      // 判断本地是否有用户信息
+      let user = window.localStorage.getItem("user")
+
+      // 如果user有数据说明登录过了,否则没有
+      if(user){
+        // 登录了  跳转到个人后台页面
+        this.$router.push("/upPersonal")
+      }else{
+        // 没登录
+        this.dialogVisible = true
+      }
     }
   }
 }

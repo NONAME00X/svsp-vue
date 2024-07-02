@@ -15,6 +15,11 @@ const router = createRouter({
       name: 'play',
       // 路由懒加载：需要时再加载，不是提前就加载好
       component: () => import('../views/Play.vue')  // 在访问页面时才导入
+    },
+    {
+      path: '/upPersonal',
+      name: 'upPersonal',
+      component: () => import('../views/up/UpPersonal.vue')  
     }
   ]
 })
