@@ -27,6 +27,9 @@
       <!-- 头像、个人、投稿 -->
       <el-col :span="8">
         <ul class="menu">
+          <li>
+            <el-avatar :size="40" src="https://cdjava96.oss-cn-chengdu.aliyuncs.com/avatar.png" />
+          </li>
           <li style="margin-left: 10px;margin-right: 10px;">
             <el-icon color="white">
               <Avatar />
