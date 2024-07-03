@@ -19,7 +19,19 @@ const router = createRouter({
     {
       path: '/upPersonal',
       name: 'upPersonal',
-      component: () => import('../views/up/UpPersonal.vue')  
+      component: () => import('../views/up/UpPersonal.vue'),
+      children:[  // 二级路由：配子页面路由
+        {
+          path: 'videoManage',  // 二级路由的path不能以/开头，只写字符串就行
+          name: 'videoManage',
+          component: () => import('../views/up/VideoManage.vue')
+        },
+        {
+          path: 'message',
+          name: 'message',
+          component: () => import('../views/up/Message.vue')
+        }
+      ]  
     }
   ]
 })
