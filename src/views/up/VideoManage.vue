@@ -7,7 +7,7 @@
         <el-button type="success">搜索</el-button>
       </el-col>
       <el-col :span="1" :offset="15">
-        <el-button type="primary">添加</el-button>
+        <el-button type="primary" @click="$router.push('/upPersonal/addVideo')">添加</el-button>
       </el-col>
     </el-row>
 

@@ -30,6 +30,11 @@ const router = createRouter({
           path: 'message',
           name: 'message',
           component: () => import('../views/up/Message.vue')
+        },
+        {
+          path: 'addVideo',
+          name: 'addVideo',
+          component: () => import('../views/up/AddVideo.vue')
         }
       ]  
     }
