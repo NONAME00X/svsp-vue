@@ -40,7 +40,14 @@
     </el-row>
 
     <!-- 分页 -->
-    <el-row></el-row>
+    <el-row>
+      <el-pagination 
+        layout="prev, pager, next, jumper" 
+        :total="total" 
+        :default-page-size="size"
+        @current-change="pageChange"
+        />
+    </el-row>
   </div>
 </template>
 <script>
@@ -55,22 +62,32 @@ export default{
   },
   mounted(){
     // 页面加载时去查询出第一页的视频信息
-    // video/findByUid/1/5    video/findByUid?page=1&size=5&account=xxx
-    // `模板字符串`  方便拼接字符串
-    this.$axios.get(`video/findByUid/${this.page}/${this.size}`).then(res =>{
-      // 响应对象：里面包含了状态、数据、响应头
-      console.log(res)
-      // res.data属性：存放后端返回的数据  ResponseResult 对象
-      console.log(res.data)
-      // res.data.data：分页信息 ResPage
-      console.log(res.data.data)
-      // 获取到了分页信息对象
-      let resPage = res.data.data
-      // 获取总条数
-      this.total = resPage.total
-      // 获取当前页数据
-      this.videoList = resPage.data
-    })
+    this.getData()
+  },
+  methods:{
+    pageChange(page){
+      this.page = page
+      //
+      this.getData()
+    },
+    getData(){
+      // video/findByUid/1/5    video/findByUid?page=1&size=5&account=xxx
+      // `模板字符串`  方便拼接字符串
+      this.$axios.get(`video/findByUid/${this.page}/${this.size}`).then(res =>{
+        // 响应对象：里面包含了状态、数据、响应头
+        console.log(res)
+        // res.data属性：存放后端返回的数据  ResponseResult 对象
+        console.log(res.data)
+        // res.data.data：分页信息 ResPage
+        console.log(res.data.data)
+        // 获取到了分页信息对象
+        let resPage = res.data.data
+        // 获取总条数
+        this.total = resPage.total
+        // 获取当前页数据
+        this.videoList = resPage.data
+      })
+    }
   }
 }
 </script>
