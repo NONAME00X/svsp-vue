@@ -14,9 +14,28 @@
     <!-- 表格 -->
     <el-row>
       <el-table :data="videoList" style="width: 100%">
-        <el-table-column prop="title" label="视频标题" width="180" />
-        <el-table-column prop="cover" label="视频封面" width="180" />
-        <el-table-column prop="video" label="视频" />
+        <el-table-column prop="title" label="视频标题" width="180" align="center"/>
+
+        <!-- prop：对象的属性，只能在el-table-column中使用 -->
+        <!-- 如果想在子标签中访问属性，只能通过 #default="scoped" 插槽  scoped简单的理解成 videoList-->
+        <el-table-column label="视频封面" width="180" #default="scoped" align="center">
+          <!-- scoped.row：当前行的对象 -->
+          <el-image :src="scoped.row.cover"></el-image>
+        </el-table-column>
+
+        <el-table-column label="视频" #default="scoped" align="center">
+          <!-- controls:播放控件 -->
+          <video :src="scoped.row.video" style="width: 160px;height: 90px;" controls></video>
+        </el-table-column>
+
+        <el-table-column prop="uptime" label="上传时间" width="180" align="center"/>
+        <el-table-column prop="playnums" label="播放次数" width="180" align="center"/>
+
+        <el-table-column label="操作" align="center">
+          <el-button type="primary">查看</el-button>
+          <el-button type="warning">编辑</el-button>
+          <el-button type="danger">删除</el-button>
+        </el-table-column>
       </el-table>
     </el-row>
 
