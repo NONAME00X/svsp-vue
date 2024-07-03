@@ -5,10 +5,10 @@
         <el-input placeholder="请输入视频名称" v-model="title"></el-input>
 
         <!-- 选封面 -->
-        <ImageChange></ImageChange>
+        <ImageChange @changeFile="coverChange"></ImageChange>
         
         <!-- 选视频 -->
-        <VideoChange></VideoChange>
+        <VideoChange @changeFile="videoChange"></VideoChange>
 
         <!-- 下拉菜单 -->
         <el-select
@@ -28,7 +28,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-button type="success">上传视频</el-button>
+      <el-button type="success" @click="upload">上传视频</el-button>
     </el-row>
   </div>
 </template>
@@ -40,7 +40,9 @@ export default{
     return{
       cids: [],//分类id的数组，里面保存用户选择的分类id,
       categoryList:[],
-      title: ""
+      title: "",
+      cover: null,
+      video: null
     }
   },
   components:{
@@ -59,6 +61,30 @@ export default{
     changeCategory(cids){
       // 记录选中了哪些
       this.cids = cids
+    },
+    upload(){
+      // 得到标题、图片、视频、分类
+      let data = new FormData()
+      data.append("title", this.title)
+      data.append("cover", this.cover)
+      data.append("video", this.video)
+      data.append("cids", this.cids)
+
+      // 发请求提交数据
+      this.$axios.post("video/add", data, {
+        headers:{
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(res => {
+        console.log(res)
+      })
+
+    },
+    coverChange(cover){
+      this.cover = cover
+    },
+    videoChange(video){
+      this.video = video
     }
   }
 }
