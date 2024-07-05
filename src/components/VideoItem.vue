@@ -33,7 +33,7 @@ export default {
   },
   methods:{
     play(id){
-      this.$router.push("/playPage/" + id)
+      this.$router.push("/play/" + id)   //   /play/n
     }
   }
 }

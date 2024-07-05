@@ -7,6 +7,8 @@ const http = axios.create({
 });
 // 请求拦截器：会在axios所有请求发送出去之前执行一段特点的代码，例如将token放到请求头中
 http.interceptors.request.use(config =>{
+
+  console.log("---------------");
   // 从本地获取token
   let token = window.localStorage.getItem("token")
 

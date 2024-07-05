@@ -11,7 +11,7 @@ const router = createRouter({
       component: Index   // 页面的名字，需要与导入时的名字一直
     },
     {
-      path: '/play',
+      path: '/play/:abc',  // 动态路由：可以用来传参  id：变量名
       name: 'play',
       // 路由懒加载：需要时再加载，不是提前就加载好
       component: () => import('../views/Play.vue')  // 在访问页面时才导入

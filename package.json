@@ -13,7 +13,8 @@
     "axios": "^1.7.2",
     "element-plus": "^2.7.6",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vue-router": "^4.3.3",
+    "xgplayer": "^3.0.18"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
