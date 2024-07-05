@@ -25,7 +25,6 @@ export default {
   name: 'MyVideo',
   mounted() {
     // 发送请求获取视频信息
-    console.log("11111111111");
     this.init()
   },
   data() {
@@ -111,24 +110,23 @@ export default {
         danmu: {
           comments: [
             {
-              duration: 5000,
+              duration: 5000,  // 弹幕显示时间  最少5秒
               id: '2',
-              start: 3000,
-              txt: '长弹幕长弹幕长弹幕',
+              start: 3000,    // 弹幕出现的事件
+              txt: '第一条弹幕',    // 弹幕的内容
               color: true,
-              mode: 'top',
+              mode: 'top',          // 弹幕出现位置  top屏幕上边、中间位置
               style: {
                 //弹幕自定义样式
-                color: '#ffffff',
-                fontSize: '50px',
+                color: '#ff0000'
               },
             },
             {
               duration: 5000,
               id: '3',
               start: 4000,
-              txt: '长弹幕长弹幕长弹幕',
-              mode: 'bottom',
+              txt: '第二条弹幕',
+              mode: 'bottom',     // bottom屏幕下边、中间位置
               style: {
                 //弹幕自定义样式
                 color: '#ff0000',
@@ -142,8 +140,8 @@ export default {
               duration: 5000,
               id: '4',
               start: 5000,
-              txt: '长弹幕长弹幕长弹幕',
-              mode: 'scroll',
+              txt: '第三条弹幕',
+              mode: 'scroll',   // scroll从屏幕右侧向左侧移动
               style: {
                 //弹幕自定义样式
                 color: '#ff9500',
@@ -192,7 +190,7 @@ export default {
           closeDefaultBtn: false, //是否隐藏弹幕开关按钮，设置为true时不显示开关按钮
           defaultOpen: true, //是否默认开启弹幕，设置为false时不开启弹幕
           panel: false, //弹幕面板
-          fontSize: 30, // 弹幕字体大小  px
+          fontSize: 28, // 弹幕字体大小  px
         },
       })
       this.player.on(Events.PLAY, (ev) => {
@@ -222,7 +220,7 @@ export default {
         mode: 'scroll',
         style: {
           //弹幕自定义样式
-          color: '#ffffff'
+          color: '#ff0000'
         },
       }
       console.log(content)
