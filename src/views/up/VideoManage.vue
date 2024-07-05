@@ -29,12 +29,19 @@
         </el-table-column>
 
         <el-table-column prop="uptime" label="上传时间" width="180" align="center"/>
-        <el-table-column prop="playnums" label="播放次数" width="180" align="center"/>
+        <el-table-column prop="playnums" label="播放次数" width="100" align="center"/>
 
-        <el-table-column label="操作" align="center">
+        <el-table-column label="视频状态" align="center" #default="scoped"  width="100">
+          <el-tag v-if="scoped.row.state == 'video_pass'" type="success">正常</el-tag>
+          <el-tag v-if="scoped.row.state == 'video_commit'" type="warning">审核中</el-tag>
+          <el-tag v-if="scoped.row.state == 'video_reject'" type="danger">未通过</el-tag>
+          <el-tag v-if="scoped.row.state == 'video_lock'" type="info">被锁定</el-tag>
+        </el-table-column>
+
+        <el-table-column label="操作" align="center" #default="scoped">
           <el-button type="primary">查看</el-button>
-          <el-button type="warning">编辑</el-button>
-          <el-button type="danger">删除</el-button>
+          <el-button type="warning" v-if="scoped.row.state != 'video_lock'">编辑</el-button>
+          <el-button type="danger" v-if="scoped.row.state != 'video_lock'">删除</el-button>
         </el-table-column>
       </el-table>
     </el-row>

@@ -77,6 +77,11 @@ export default{
         }
       }).then(res => {
         console.log(res)
+        if(res.data.code == 200){
+          this.$message.success("添加成功!")
+          // 回到视频管理页
+          this.$router.push("/upPersonal/videoManage")
+        }
       })
 
     },
