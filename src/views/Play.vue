@@ -126,6 +126,16 @@ export default{
     },
     commitReview(review){
       console.log(review)
+      // 发请求提交评论信息
+      let data = {
+        vid: this.video.id,
+        content: review
+      }
+      this.$axios.post("review/add", data).then(res => {
+        if(res.data.code == 200){
+          this.$message.success("发表成功,等待审核")
+        }
+      })
     }
   }
 }
