@@ -108,80 +108,7 @@ export default {
         keyShortcut: false, // 是否开启快捷键模式,
         plugins: [Danmu],
         danmu: {
-          comments: [
-            {
-              duration: 5000,  // 弹幕显示时间  最少5秒
-              id: '2',
-              start: 3000,    // 弹幕出现的事件
-              txt: '第一条弹幕',    // 弹幕的内容
-              color: true,
-              mode: 'top',          // 弹幕出现位置  top屏幕上边、中间位置
-              style: {
-                //弹幕自定义样式
-                color: '#ff0000'
-              },
-            },
-            {
-              duration: 5000,
-              id: '3',
-              start: 4000,
-              txt: '第二条弹幕',
-              mode: 'bottom',     // bottom屏幕下边、中间位置
-              style: {
-                //弹幕自定义样式
-                color: '#ff0000',
-                border: 'solid 1px #ff9500',
-                borderRadius: '50px',
-                padding: '5px 11px',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              },
-            },
-            {
-              duration: 5000,
-              id: '4',
-              start: 5000,
-              txt: '第三条弹幕',
-              mode: 'scroll',   // scroll从屏幕右侧向左侧移动
-              style: {
-                //弹幕自定义样式
-                color: '#ff9500',
-                border: 'solid 1px #ff9500',
-                borderRadius: '50px',
-                padding: '5px 11px',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              },
-            },
-            {
-              duration: 5000,
-              id: '5',
-              start: 8000,
-              txt: '长弹幕长弹幕长弹幕',
-              mode: 'scroll',
-              style: {
-                //弹幕自定义样式
-                color: '#ff9500',
-                border: 'solid 1px #ff9500',
-                borderRadius: '50px',
-                padding: '5px 11px',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              },
-            },
-            {
-              duration: 5000,
-              id: '6',
-              start: 8200,
-              txt: '长弹幕长弹幕长弹幕',
-              mode: 'scroll',
-              style: {
-                //弹幕自定义样式
-                color: '#ff9500',
-                border: 'solid 1px #ff9500',
-                borderRadius: '50px',
-                padding: '5px 11px',
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              },
-            },
-          ],
+          comments: [],
           //弹幕显示区域
           area: {
             start: 0, //区域顶部到播放器顶部所占播放器高度的比例
@@ -213,19 +140,31 @@ export default {
     },
     sendDanmu() {
       let content = {
-        duration: 5000,
-        id: '' + this.id++,
         start: this.playertime * 1000 + 500,
         txt: this.damuContent,
-        mode: 'scroll',
-        style: {
-          //弹幕自定义样式
-          color: '#ff0000'
-        },
+        vid: this.video.id,
+        style:{}
       }
-      console.log(content)
-      this.player.danmu.sendComment(content)
-      this.damuContent = ''
+
+      // 将弹幕发送到服务器
+      this.$axios.post("danmu/add", content).then(res => {
+        console.log(res.data)
+        let danmu = res.data.data
+
+        // 封装弹幕信息显示在屏幕上
+        content.id = danmu.id
+        content.duration = danmu.duration
+        content.mode = danmu.mode
+        content.style.color = danmu.color
+
+        // 发弹幕到屏幕上
+        this.player.danmu.sendComment(content)
+        // 清空弹幕输入框
+        this.damuContent = ''
+      })
+
+      // console.log(content)
+      
     },
   },
 }
