@@ -66,8 +66,8 @@ export default {
       console.log(video)
       this.player = new Player({
         id: 'xgPlayerWrap', // 占位dom元素
-        width: 640,
-        height: 360, // 视频宽高尺寸
+        width: 320,
+        height: 180, // 视频宽高尺寸
         url: video.video, // 视频源
         poster: video.cover, // 视频封面
         autoplay: false, // 是否自动播放，不自动播放，浏览器有限制规则
@@ -161,7 +161,7 @@ export default {
     },
     sendDanmu() {
       let content = {
-        start: this.playertime * 1000 + 500,
+        start: this.playertime * 1000,
         txt: this.damuContent,
         vid: this.video.id,
         style:{}
