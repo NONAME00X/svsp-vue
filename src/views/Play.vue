@@ -60,6 +60,10 @@
           </el-col>
         </el-row>
 
+        <!-- 发表评论 -->
+        <el-row>
+          <Editor @review="commitReview"></Editor>
+        </el-row>
       </el-col>
     </el-row>
 
@@ -72,6 +76,7 @@
 import { RouterLink} from 'vue-router'
 import MyVideo from '../components/MyVideo.vue'
 import Header from '../components/Header.vue'
+import Editor from '../components/editor/Editor.vue'
 
 export default{
   data(){
@@ -105,7 +110,8 @@ export default{
   },
   components:{
     MyVideo,
-    Header
+    Header,
+    Editor
   },
   methods:{
     changeUp(){
@@ -117,6 +123,9 @@ export default{
     },
     changeFollow(){
       this.isFollow = !this.isFollow
+    },
+    commitReview(review){
+      console.log(review)
     }
   }
 }

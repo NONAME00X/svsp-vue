@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@vueup/vue-quill": "^1.0.0-alpha.40",
     "axios": "^1.7.2",
     "element-plus": "^2.7.6",
+    "quill-blot-formatter": "^1.0.5",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
     "xgplayer": "^3.0.18"
