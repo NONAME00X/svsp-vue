@@ -37,11 +37,32 @@ export default {
   },
   props: {
     video: Object,
+    danmuList: Array
   },
   methods: {
     init() {
       let vue = this
       let video = this.video
+      let danmuList = new Array()
+
+      console.log(this.danmuList);
+
+      // 遍历弹幕封装数据
+      for (const danmu of this.danmuList) {
+        let comment = {
+          id: danmu.id,
+          duration: danmu.duration,
+          start: danmu.start,
+          mode: danmu.mode,
+          txt: danmu.txt,
+          style:{
+            color: danmu.color
+          }
+        }
+        // 将弹幕放入数组
+        danmuList.push(comment)
+      }
+
       console.log(video)
       this.player = new Player({
         id: 'xgPlayerWrap', // 占位dom元素
@@ -108,7 +129,7 @@ export default {
         keyShortcut: false, // 是否开启快捷键模式,
         plugins: [Danmu],
         danmu: {
-          comments: [],
+          comments: danmuList,
           //弹幕显示区域
           area: {
             start: 0, //区域顶部到播放器顶部所占播放器高度的比例

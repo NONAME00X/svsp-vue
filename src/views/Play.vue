@@ -28,7 +28,7 @@
     <el-row>
       <!-- 播放器 -->
       <el-col :span="16">
-        <MyVideo v-if="video" :video="video"></MyVideo>
+        <MyVideo v-if="video!=null && danmuList!=null" :video="video" :danmuList="danmuList"></MyVideo>
       </el-col>
 
       <!-- 评论列表 -->
@@ -46,7 +46,8 @@ export default{
   data(){
     return {
       vid: this.$route.params.abc,  //this.$route 当前路由，params路由中的参数们
-      video: null
+      video: null,
+      danmuList: null
     }
   },
   mounted(){
@@ -56,6 +57,14 @@ export default{
       // 保存视频信息
       this.video = res.data.data
     })
+    // 发请求获取当前视频的弹幕列表
+    this.$axios.get("danmu/findByVid/" + this.vid).then(res => {
+      console.log(res.data.data)
+      // 将弹幕传给子组件
+      this.danmuList = res.data.data
+    })
+
+
   },
   components:{
     MyVideo
