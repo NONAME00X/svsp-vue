@@ -62,6 +62,8 @@ export default{
   border: 1px solid lightgray;
   border-radius: 5px;
   margin-bottom: 10px;
+  padding-left: 5px;
+  padding-top: 5px;
 }
 .reivew-content{
   position: relative;

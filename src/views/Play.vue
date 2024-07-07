@@ -4,11 +4,11 @@
 
     <el-row>
       <el-col :span="20" :offset="2">
-        <el-row>
+        <el-row :gutter="10">
           <!-- 视频、评论、点赞 -->
-          <el-col :span="16">
+          <el-col>
             <!-- 视频信息、用户信息 -->
-            <el-row v-if="video">
+            <el-row v-if="video" :gutter="10">
               <!-- 视频信息 -->
               <el-col :span="16">
                 <!-- 标题 -->
@@ -32,7 +32,7 @@
             </el-row>
 
             <!-- 视频播放、评论 -->
-            <el-row>
+            <el-row :gutter="10">
               <!-- 播放器 -->
               <el-col :span="16">
                 <MyVideo v-if="video!=null && danmuList!=null" :video="video" :danmuList="danmuList"></MyVideo>
