@@ -146,7 +146,7 @@ export default {
         this.$emit('start')
       })
       this.player.on(Events.PAUSE, (ev) => {
-        console.log('-播放结束-', ev)
+        console.log('-播放暂停-', ev)
       })
       this.player.on('loadedmetadata', (ev) => {
         console.log('-媒体数据加载好了-', ev)
@@ -157,6 +157,13 @@ export default {
       this.player.on(Events.TIME_UPDATE, (ev) => {
         window.localStorage.setItem('video_' + video.id, ev.currentTime)
         this.playertime = ev.currentTime
+      })
+      this.player.on(Events.ENDED, (ev) => {
+        console.log('-播放结束-', ev)
+        // 将本地记录的播放时间给删除：下一次从0开始播放了
+        window.localStorage.removeItem('video_' + video.id)
+        // 向父组件发送播放结束的事件
+        this.$emit("ended")
       })
     },
     sendDanmu() {

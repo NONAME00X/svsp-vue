@@ -35,7 +35,11 @@
             <el-row :gutter="10">
               <!-- 播放器 -->
               <el-col :span="16">
-                <MyVideo v-if="video!=null && danmuList!=null" :video="video" :danmuList="danmuList"></MyVideo>
+                <MyVideo 
+                  v-if="video!=null && danmuList!=null" 
+                  :video="video" 
+                  :danmuList="danmuList" 
+                  @ended="playEnd"></MyVideo>
               </el-col>
               <!-- 评论列表 -->
               <el-col :span="8">
@@ -98,7 +102,8 @@ export default{
       danmuList: null,
       isUp: false,
       isFollow: false,
-      reviewList: null
+      reviewList: null,
+      key: null
     }
   },
   mounted(){
@@ -120,6 +125,12 @@ export default{
         this.reviewList = res.data.data
       })
 
+      // 申请key：避免用户反复拖拽进度条让视频播放结束造成播放次数异常
+      this.$axios.get("key/apply").then(res => {
+        console.log(res.data.data)
+        //
+        this.key = res.data.data
+      })
     })
     // 发请求获取当前视频的弹幕列表
     this.$axios.get("danmu/findByVid/" + this.vid).then(res => {
@@ -170,6 +181,18 @@ export default{
           this.reviewList.splice(i, 1)
           break
         }
+      }
+    },
+    playEnd(){
+      console.log("视频播放结束了...")
+      // 判断是否可以发请求
+      if(this.key){
+        // 可以发请求
+        console.log("发请求")
+        // 后台次数+成功之后将key置为null
+        this.key = null
+      }else{
+        console.log("不做任何处理");
       }
     }
   }
