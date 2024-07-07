@@ -37,6 +37,12 @@ const router = createRouter({
           component: () => import('../views/up/AddVideo.vue')
         }
       ]  
+    },
+    {
+      path: '/adminPersonal',  // 动态路由：可以用来传参  id：变量名
+      name: 'adminPersonal',
+      // 路由懒加载：需要时再加载，不是提前就加载好
+      component: () => import('../views/admin/AdminPersonal.vue') 
     }
   ]
 })

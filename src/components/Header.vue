@@ -153,7 +153,14 @@ export default {
       // 如果user有数据说明登录过了,否则没有
       if(user){
         // 登录了  跳转到个人后台页面
-        this.$router.push("/upPersonal")
+        // 判断当前用户是管理员还是up主
+        user = JSON.parse(user)
+        //
+        if(user.role == 'up'){
+          this.$router.push("/upPersonal")
+        }else{
+          this.$router.push("/adminPersonal")
+        }
       }else{
         // 没登录
         this.dialogVisible = true
