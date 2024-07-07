@@ -48,26 +48,30 @@
             </el-row>
 
             <!-- 点赞、收藏、关注、举报 -->
-            <el-row style="margin-top: 20px;">
-              <el-col :span="2">
-                <span class="info">点赞</span>
-                <img src="@/assets/up.png" v-if="!isUp" width="30px" @click="changeUp">
-                <img src="@/assets/up-check.png" v-else width="30px" @click="changeUp">
-              </el-col>
-              <el-col :span="2">
-                <span class="info">关注</span>
-                <img src="@/assets/follow.png" v-if="!isFollow" width="30px" @click="changeFollow">
-                <img src="@/assets/follow-check.png" v-else width="30px" @click="changeFollow">
-              </el-col>
-              <el-col :span="2">
-                <span class="info">收藏</span>
-                <img src="@/assets/like.png" alt="" width="30px">
-              </el-col>
-              <el-col :span="2" :offset="16">
-                <el-button type="warning" plain size="small">举报</el-button>
+            <el-row style="margin-top: 20px;margin-bottom: 10px;">
+              <el-col :span="16">
+                <el-row style="font-size: 12px;">
+                  <el-col :span="2">
+                    <span class="info">点赞</span>
+                    <img src="@/assets/up.png" v-if="!isUp" width="20px" @click="changeUp">
+                    <img src="@/assets/up-check.png" v-else width="20px" @click="changeUp">
+                  </el-col>
+                  <el-col :span="2">
+                    <span class="info">关注</span>
+                    <img src="@/assets/follow.png" v-if="!isFollow" width="20px" @click="changeFollow">
+                    <img src="@/assets/follow-check.png" v-else width="20px" @click="changeFollow">
+                  </el-col>
+                  <el-col :span="2">
+                    <span class="info">收藏</span>
+                    <img src="@/assets/like.png" alt="" width="20px">
+                  </el-col>
+                  <el-col :span="2" :offset="16">
+                    <el-button type="warning" plain size="small">举报</el-button>
+                  </el-col>
+                </el-row>
+
               </el-col>
             </el-row>
-
             <!-- 发表评论 -->
             <el-row>
               <Editor @review="commitReview"></Editor>
@@ -175,6 +179,6 @@ export default{
 <style scoped>
 .info{
   position: relative;
-  top: -8px;
+  top: -5px;
 }
 </style>
