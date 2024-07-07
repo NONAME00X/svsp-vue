@@ -23,7 +23,7 @@ const router = createRouter({
       children:[  // 二级路由：配子页面路由
         {
           path: 'videoManage',  // 二级路由的path不能以/开头，只写字符串就行
-          name: 'videoManage',
+          name: 'upVideoManage',
           component: () => import('../views/up/VideoManage.vue')
         },
         {
@@ -42,7 +42,14 @@ const router = createRouter({
       path: '/adminPersonal',  // 动态路由：可以用来传参  id：变量名
       name: 'adminPersonal',
       // 路由懒加载：需要时再加载，不是提前就加载好
-      component: () => import('../views/admin/AdminPersonal.vue') 
+      component: () => import('../views/admin/AdminPersonal.vue'),
+      children:[
+        {
+          path: 'videoManage',  // 二级路由的path不能以/开头，只写字符串就行
+          name: 'adminVideoManage',
+          component: () => import('../views/admin/VideoManage.vue')
+        },
+      ] 
     }
   ]
 })

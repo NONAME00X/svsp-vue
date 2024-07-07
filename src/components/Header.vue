@@ -167,9 +167,9 @@ export default {
         user = JSON.parse(user)
         //
         if(user.role == 'up'){
-          this.$router.push("/upPersonal")
+          this.$router.push("/upPersonal/videoManage")
         }else{
-          this.$router.push("/adminPersonal")
+          this.$router.push("/adminPersonal/videoManage")
         }
       }else{
         // 没登录
