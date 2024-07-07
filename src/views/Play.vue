@@ -34,8 +34,16 @@
             <!-- 视频播放、评论 -->
             <el-row>
               <!-- 播放器 -->
-              <el-col>
+              <el-col :span="16">
                 <MyVideo v-if="video!=null && danmuList!=null" :video="video" :danmuList="danmuList"></MyVideo>
+              </el-col>
+              <!-- 评论列表 -->
+              <el-col :span="8">
+                <el-scrollbar height="400px">
+                  <el-row v-for="review in reviewList" :key="review">
+                    <ReviewItem :review="review"></ReviewItem>
+                  </el-row>
+                </el-scrollbar>
               </el-col>
             </el-row>
 
@@ -65,14 +73,7 @@
               <Editor @review="commitReview"></Editor>
             </el-row>
           </el-col>
-
-          <!-- 评论列表 -->
-          <el-col :span="8">
-
-          </el-col>
         </el-row>
-
-        
       </el-col>
     </el-row>
   </div>
@@ -83,6 +84,7 @@ import { RouterLink} from 'vue-router'
 import MyVideo from '../components/MyVideo.vue'
 import Header from '../components/Header.vue'
 import Editor from '../components/editor/Editor.vue'
+import ReviewItem from '../components/ReviewItem.vue'
 
 export default{
   data(){
@@ -91,7 +93,8 @@ export default{
       video: null,
       danmuList: null,
       isUp: false,
-      isFollow: false
+      isFollow: false,
+      reviewList: null
     }
   },
   mounted(){
@@ -110,7 +113,7 @@ export default{
       // 查询当前视频的评论信息
       this.$axios.get("review/findByVid/" + this.video.id).then(res => {
         console.log(res.data.data)
-        
+        this.reviewList = res.data.data
       })
 
     })
@@ -124,7 +127,8 @@ export default{
   components:{
     MyVideo,
     Header,
-    Editor
+    Editor,
+    ReviewItem
   },
   methods:{
     changeUp(){
