@@ -189,8 +189,12 @@ export default{
       if(this.key){
         // 可以发请求
         console.log("发请求")
-        // 后台次数+成功之后将key置为null
-        this.key = null
+        this.$axios.get(`video/addPlayNums/${this.video.id}/${this.key}`).then(res => {
+          if(res.data.code == 200){
+            // 后台次数+成功之后将key置为null
+            this.key = null
+          }
+        })
       }else{
         console.log("不做任何处理");
       }
