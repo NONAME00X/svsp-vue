@@ -39,9 +39,9 @@
               </el-col>
               <!-- 评论列表 -->
               <el-col :span="8">
-                <el-scrollbar height="400px">
+                <el-scrollbar height="470px">
                   <el-row v-for="review in reviewList" :key="review">
-                    <ReviewItem :review="review"></ReviewItem>
+                    <ReviewItem :review="review" @del="delReview"></ReviewItem>
                   </el-row>
                 </el-scrollbar>
               </el-col>
@@ -153,6 +153,20 @@ export default{
           this.$message.success("发表成功,等待审核")
         }
       })
+    },
+    delReview(id){
+      console.log(id)
+      // 删除评论：先发请求删后台，删除之后再删前端
+
+      // 删前端：用id与数组中的每一个评论的id进行比较，如果一样就删除数组中的该评论
+      for(let i = 0; i < this.reviewList.length; i++){
+        if(id == this.reviewList[i].id){
+          // 参数1：元素下标
+          // 参数2：从该下标开始删除几个元素
+          this.reviewList.splice(i, 1)
+          break
+        }
+      }
     }
   }
 }

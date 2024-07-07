@@ -11,8 +11,8 @@
       <el-col :span="6">
         <span style="font-size: 10px;">{{review.time}}</span>
       </el-col>
-      <el-col :span="1" :offset="9" v-if="isMyReview()">
-        <el-icon>
+      <el-col :span="1" :offset="8" v-if="isMyReview()">
+        <el-icon @click="del">
           <Close/>
         </el-icon>
       </el-col>
@@ -27,11 +27,12 @@
 
     <!-- 点赞、回复、踩他 -->
     <el-row>
-      <el-col :span="10" :offset="14">
+      <el-col :span="5" :offset="19">
+        <!-- 要实现点赞、踩的功能需要给t_review表添加两个字段：点赞数、踩的数量 -->
         <div class="action">
-          <span>点赞</span>
-          <span>回复</span>
-          <span>踩他</span>
+          <img src="@/assets/up.png" alt="" width="20px">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <img src="@/assets/down.png" alt="" width="20px">
         </div>
       </el-col>
     </el-row>
@@ -52,6 +53,26 @@ export default{
         }
       }
       return false
+    },
+    del(){
+      // 删除评论
+      // 弹提示框
+      this.$messageBox.confirm(
+        '是否要删除该评论',
+        '警告',
+        {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }
+      ).then(() =>{
+        console.log("点击了确定")
+        // 子组件通知父组件删除当前评论信息
+        // 通过自定义事件
+        this.$emit("del", this.review.id)
+      }).catch(() => {
+        console.log("点击了取消")
+      })
     }
   }
 }
