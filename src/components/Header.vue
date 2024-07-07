@@ -19,13 +19,13 @@
       </el-col>
 
       <!-- 搜索输入框 -->
-      <el-col :span="6">
+      <el-col :span="5">
         <!-- 输入框 -->
         <el-input placeholder="请输入搜索内容"></el-input>
       </el-col>
 
       <!-- 头像、个人、投稿 -->
-      <el-col :span="8">
+      <el-col :span="9">
         <ul class="menu">
           <li @click="checkState">
             <el-avatar :size="40" :src="avatar" />
@@ -63,10 +63,15 @@
           <li style="margin-left: 10px;margin-right: 10px;">
             <div style="color: white;">
               <el-button type="danger"
-                         @click="upload">
+                         @click="upload"
+                         v-if="isNotAdmin()">
                 <el-icon>
                   <UploadFilled />
                 </el-icon>投稿
+              </el-button>
+
+              <el-button type="danger" plain v-if="isLogin" @click="logout">
+                注销
               </el-button>
             </div>
           </li>
@@ -110,7 +115,8 @@ export default {
         account: "",
         password: ""
       },
-      avatar: "https://cdjava96.oss-cn-chengdu.aliyuncs.com/login.png"
+      avatar: "https://cdjava96.oss-cn-chengdu.aliyuncs.com/login.png",
+      isLogin: false
     }
   },
   mounted(){
@@ -119,6 +125,8 @@ export default {
     if(user){
       // JSON.parse 将字符串转换成对象
       this.avatar = JSON.parse(user).avatar
+      // 已登录
+      this.isLogin = true
     }
   },
   methods:{
@@ -135,6 +143,8 @@ export default {
 
           // 设置用户头像
           this.avatar = user.avatar
+
+          this.isLogin = true
 
           // localStorage:浏览器自带用来存储数据的
           // JSON.stringify 将对象转换JSON格式字符串，因为localStorage只能存字符串
@@ -165,6 +175,26 @@ export default {
         // 没登录
         this.dialogVisible = true
       }
+    },
+    isNotAdmin(){
+      let user = window.localStorage.getItem("user")
+      if(user){
+        user = JSON.parse(user)
+        if(user.role == 'admin'){
+          return false
+        }
+      }
+      return true
+    },
+    logout(){
+      // 删除本地的用户信息
+      window.localStorage.removeItem("user")
+      window.localStorage.removeItem("token")
+      //
+      this.isLogin = false
+      this.avatar = "https://cdjava96.oss-cn-chengdu.aliyuncs.com/login.png"
+      // 登出之后跳转到首页
+      this.$router.push("/")
     }
   }
 }
