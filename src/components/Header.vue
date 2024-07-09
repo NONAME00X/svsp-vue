@@ -153,6 +153,9 @@ export default {
 
           // 隐藏登录的对话框
           this.dialogVisible = false
+
+          // 通过自定义事件告知父组件登录成功了
+          this.$emit("loginSuccess")
         }
       })
     },

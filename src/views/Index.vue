@@ -2,7 +2,7 @@
   <div>
     <!-- 1.header：logo、搜索、头像 -->
     <!-- 3.使用组件 -->
-    <Header></Header>
+    <Header @loginSuccess="loginSuccess"></Header>
 
     <el-row>
       <el-col :span="20" :offset="2">
@@ -29,7 +29,9 @@ import Hot from '../components/Hot.vue'
 export default{
   // 写事件函数，例如点击、双击、change事件等等
   methods:{
-    
+    loginSuccess(){
+      this.$emit("loginSuccess")
+    }
   },
   components:{
     // 2.注册组件
