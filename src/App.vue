@@ -12,6 +12,22 @@ export default{
   methods:{
     loginSuccess(){
       console.log("app 监听到登录成功")
+      // 建立websocket连接
+      var url = "ws://localhost:8080/WebSocketHandler/"
+      let user = JSON.parse(window.localStorage.getItem("user"))
+
+      this.ws = new WebSocket(url + user.account)
+
+      // 绑定事件 
+      this.ws.onopen = this.open
+      this.ws.onmessage = this.message
+    },
+    open(){
+      console.log("建立连接成功")
+    },
+    message(res){
+      // 收到消息
+      console.log(res)
     }
   }
 }
