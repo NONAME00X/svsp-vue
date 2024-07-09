@@ -32,7 +32,8 @@ export default{
       this.$notify({
         title:"通知",
         message: res.data,
-        duration: 2000
+        duration: 2000,
+        type: 'warning'
       })
     }
   }
