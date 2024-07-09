@@ -6,8 +6,20 @@
         <el-input placeholder="视频标题" style="width: 80%;"></el-input>
         <el-button type="success">搜索</el-button>
       </el-col>
-      <el-col :span="1" :offset="15">
-        <el-button type="primary" @click="$router.push('/upPersonal/addVideo')">添加</el-button>
+      <el-col :span="3">
+        <el-select
+          v-model="state"
+          placeholder="请选择"
+          style="width: 240px"
+          @change="changeState"
+        >
+          <el-option
+            v-for="item in stateList"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
       </el-col>
     </el-row>
 
@@ -62,7 +74,26 @@ export default{
       page: 1, // 页面
       size: 5, // 每一页多少条数据
       total: 0, // 总条数
-      videoList: [] // 当前页的视频列表、数据
+      videoList: [], // 当前页的视频列表、数据
+      state: "",
+      stateList:[
+        {
+          value: 'video_pass',
+          label: '通过'
+        },
+        {
+          value: 'video_commit',
+          label: '审核中'
+        },
+        {
+          value: 'video_lock',
+          label: '被锁定'
+        },
+        {
+          value: 'video_reject',
+          label: '未通过'
+        },
+      ]
     }
   },
   mounted(){
@@ -105,6 +136,11 @@ export default{
           this.$message.success("锁定成功")
         }
       })
+    },
+    changeState(val){
+      console.log(val)
+      // 将状态传递给后台进行分页查询
+
     }
   }
 }
