@@ -28,6 +28,12 @@ export default{
     message(res){
       // 收到消息
       console.log(res)
+      //
+      this.$notify({
+        title:"通知",
+        message: res.data,
+        duration: 2000
+      })
     }
   }
 }
