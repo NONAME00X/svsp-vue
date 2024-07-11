@@ -15,13 +15,13 @@
               <el-menu-item index="2" @click="$router.push('/upPersonal/message')">
                 <el-icon><Message/></el-icon>
                 我的消息</el-menu-item>
-              <el-menu-item index="3">
+              <el-menu-item index="3" @click="$router.push('/upPersonal/collect')">
                 <el-icon><Star/></el-icon>
                 我的收藏</el-menu-item>
-              <el-menu-item index="4">
+              <el-menu-item index="4" @click="$router.push('/upPersonal/myFans')">
                 <el-icon><Avatar/></el-icon>
                 我的粉丝</el-menu-item>
-              <el-menu-item index="5">
+              <el-menu-item index="5" @click="$router.push('/upPersonal/privateInfo')" >
                 <el-icon><Setting/></el-icon>
                 个人信息</el-menu-item>
             </el-menu>

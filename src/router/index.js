@@ -35,6 +35,22 @@ const router = createRouter({
           path: 'addVideo',
           name: 'addVideo',
           component: () => import('../views/up/AddVideo.vue')
+        },
+        {
+          path: 'collect',
+          name: 'collect',
+          component: () => import('../views/up/Collect.vue')
+        },
+        {
+          path: 'myFans',
+          name: 'myFans',
+          component: () => import('../views/up/MyFans.vue')
+        }
+        ,
+        {
+          path: 'privateInfo',
+          name: 'privateInfo',
+          component: () => import('../views/up/PrivateInfo.vue')
         }
       ]  
     },
@@ -49,6 +65,26 @@ const router = createRouter({
           name: 'adminVideoManage',
           component: () => import('../views/admin/VideoManage.vue')
         },
+        {
+          path: 'reportManage', 
+          name: 'adminReportManage',
+          component: () => import('../views/admin/ReportManage.vue')
+        },
+        {
+          path: 'reviewManage', 
+          name: 'adminReviewManage',
+          component: () => import('../views/admin/ReviewManage.vue')
+        },
+        {
+          path: 'categoryManage', 
+          name: 'adminCategoryManage',
+          component: () => import('../views/admin/CategoryManage.vue')
+        },
+        {
+          path: 'adminPrivateInfo',
+          name: 'adminPrivateInfo',
+          component: () => import('../views/up/PrivateInfo.vue')
+        }
       ] 
     }
   ]
