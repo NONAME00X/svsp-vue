@@ -4,7 +4,9 @@
         </el-input>
         <el-button @click="getCollectList">搜索</el-button>
         <el-table :data="collectList" style="width: 100%">
-            <el-table-column prop="title" label="视频title" width="180" />
+            <el-table-column label="视频title" width="180" #default="scoped">
+                <el-button type="primary" @click="$router.push(`/play/${scoped.row.vid}`)" link>{{scoped.row.title}}</el-button>
+        </el-table-column>
             <el-table-column label="被收藏视频的UP主头像" width="180" #default="scoped">
                 <el-image style="width: 50px;height: 50%;" :src="scoped.row.avatar"></el-image>
             </el-table-column>
